@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/IdeaSpaceVR/aframe-particle-system-component/master/dist/aframe-particle-system-component.min.js"></script>
+    <script defer src="script.js"></script>
+    <title>Aurel.immersive</title>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Aurel Wedding <br> /ˈaʊ̯rɛl/</a>
+        <p id="judy">Judith Lerch</p>
+        <nav>
+            <a href="threedimensional.html" class="menu-item">.threedimensional</a>
+            <a href="immersive.html" class="menu-item">.immersive</a>
+            <a href="emotive.html" class="menu-item">.emotive</a>
+        </nav>
+    </header>
+
+    <section class="landing immersive-landing">
+        <div class="flex-container">
+            <!-- A-Frame Canvas for 3D Model -->
+            <div class="info-text">
+                <h2>Description and Tips</h2>
+                <p>Your description and tips content goes here.</p>
+            </div>
+            <div class="aframe-canvas">
+                <a-scene shadow="type: pcfsoft" antialias="true">
+
+                    <!-- Directional light to cast shadows -->
+                    <a-light type="directional" position="2 6 -3" target="#model1" castShadow="true" intensity="1.2" color="#fdfbe8"></a-light>
+
+                    <a-sky color="#b3b3b3"></a-sky>
+
+                    <!-- Ambient light for overall scene illumination -->
+                    <a-light type="ambient" intensity="0.8" color="#becdff"></a-light>
+
+                    <!-- Camera Pivot at the Center -->
+                    <a-entity id="cameraPivot" position="0 3.1 0">
+                        <!-- Camera Entity -->
+                        <a-entity id="myCamera" position="0 0 4.25" camera rotation="-20 0 0"></a-entity>
+                        <!-- Ambient sounds for Winter, Rain, and Summer -->
+                        <a-sound id="winterSound" src="audio/atmoSnow.mp3" autoplay="false" loop="true"></a-sound>
+                        <a-sound id="rainSound" src="audio/atmoRain.mp3" autoplay="false" loop="true"></a-sound>
+                        <a-sound id="summerSound" src="audio/atmoSummer.mp3" autoplay="false" loop="true"></a-sound>
+
+                        <!-- Techno Sound -->
+                        <a-sound id="techno" src="audio/beat.mp3" autoplay="false" loop="true"></a-sound>
+                    </a-entity>
+
+                    <!-- Particle System for Summer (Bees flying around) -->
+                    <a-entity id="insectParticles" particle-system="preset: dust; particleCount: 100; size: 0.05; maxAge: 2; opacity: 1; velocityValue: 0.5 0 0; color: #ffcc00; direction: 0 -1 0; positionSpread: 3 0.5 3;" position="-0.5 0.5 -0.5" visible="false"></a-entity>
+
+                    <!-- Particle System for Winter (Snow falling) -->
+                    <a-entity id="snowParticles" particle-system="preset: snow; particleCount: 500; maxAge: 3.5; velocityValue: 0 0.3 0; size: 0.04; opacity: 1; positionSpread: 0.75 3 0.75;" position="0 3 0" visible="false"></a-entity>
+
+                    <!-- Particle System for Rain (Stormy rain) -->
+                    <a-entity id="rainParticles" particle-system="preset: rain; particleCount: 750; maxAge: 0.13; velocityValue: 0 5 0; velocitySpread: 0 0 0; size: 0.05; positionSpread: 3.5 3 3.5; opacity: 1; color: #22222e;" position="0 2.5 0" visible="false"></a-entity>
+
+                    <!-- Models with different textures Casting Shadows -->
+                    <a-entity id="model1" gltf-model="url(models/SummerScene.glb)" position="0 0 0" scale="0.1 0.1 0.1"
+                        rotation="0 0 0" visible="true" shadow="cast: true; receive: true"></a-entity>
+                    <a-entity id="model2" gltf-model="url(models/RainyScene.glb)" position="0 0 0" scale="0.1 0.1 0.1"
+                        rotation="0 0 0" visible="false" shadow="cast: true; receive: true"></a-entity>
+                    <a-entity id="model3" gltf-model="url(models/WinterScene.glb)" position="0 0 0" scale="0.1 0.1 0.1"
+                        rotation="0 0 0" visible="false" shadow="cast: true; receive: true"></a-entity>
+
+                    <!-- Two additional models for shuffling Casting Shadows -->
+                    <a-entity id="model4" gltf-model="url(models/BarUnlit.glb)" position="0 0 0" scale="0.1 0.1 0.1"
+                        rotation="0 0 0" visible="true" castShadow="true"></a-entity>
+                    <a-entity id="model5" gltf-model="url(models/BarLit.glb)" position="0 0 0" scale="0.1 0.1 0.1"
+                        rotation="0 0 0" visible="false" castShadow="true"></a-entity>
+                </a-scene>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="Impressum.html" class="footer-link">Impressum</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
