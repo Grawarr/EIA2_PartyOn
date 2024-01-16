@@ -106,7 +106,7 @@ switchModels(model1, model2, model3, summerSound, winterSound, rainSound, insect
 
     // Event listener for device shake
     let lastShakeTime = 0;
-    const shakeThreshold = 50;
+    const shakeThreshold = 33;
 
         window.addEventListener('devicemotion', function (event) {
             const currentTime = new Date().getTime();

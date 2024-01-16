@@ -36,6 +36,16 @@ header {
     border-radius: 0 0 10% 10%;
 }
 
+@media (max-width: 768px) {
+    .logo {
+        font-size: 18px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+}
+
 .logo {
     font-size: 24px;
     color: #001829;
