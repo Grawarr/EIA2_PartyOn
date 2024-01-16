@@ -104,6 +104,42 @@ switchModels(model1, model2, model3, summerSound, winterSound, rainSound, insect
     }
 });
 
+    // Event listener for device shake
+    let lastShakeTime = 0;
+    const shakeThreshold = 10;
+
+        window.addEventListener('devicemotion', function (event) {
+            const currentTime = new Date().getTime();
+            const timeDifference = currentTime - lastShakeTime;
+
+            if (timeDifference > 1000) {
+                const acceleration = event.accelerationIncludingGravity;
+                const accelerationMagnitude = Math.sqrt(
+                    acceleration.x * acceleration.x +
+                    acceleration.y * acceleration.y +
+                    acceleration.z * acceleration.z
+                );
+
+                if (accelerationMagnitude > shakeThreshold) {
+                    if (model1.getAttribute('visible')) {
+                        switchModels(model2, model1, model3, rainSound, winterSound, summerSound, rainyParticles, winterParticles, summerParticles);
+                    } else if (model2.getAttribute('visible')) {
+                        switchModels(model3, model1, model2, winterSound, rainSound, summerSound, winterParticles, rainyParticles, summerParticles);
+                    } else if (model3.getAttribute('visible')) {
+                        switchModels(model1, model2, model3, summerSound, winterSound, rainSound, summerParticles, winterParticles, rainyParticles);
+                    }
+
+                    lastShakeTime = currentTime;
+                }
+            }
+        });
+
+    // Event listener for tapping on the screen
+    document.addEventListener('touchstart', function () {
+        toggleLitModel();
+    });
+    
+
     // Function to update camera pivot rotation continuously
     function updateCameraPivotRotation() {
         const rotationSpeed = -0.002; // Adjust the rotation speed as needed
